@@ -16,11 +16,6 @@ lvim.builtin.which_key.mappings["`"] = {
   "<cmd>ToggleTerm direction=horizontal<cr>",
   "Horizontal terminal"
 }
-function SomeFunc(a)
-  print(a)
-end
-
-local s = SomeFunc("")
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Terminal",
