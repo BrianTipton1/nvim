@@ -5,6 +5,10 @@ lvim.format_on_save.enabled = true
 
 vim.opt.swapfile = false
 
+vim.g.VM_maps = {
+  ["I BS"] = "",
+}
+
 vim.cmd [[set relativenumber]]
 vim.cmd [[
   augroup AutoSaveGroup
