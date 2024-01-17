@@ -1,13 +1,10 @@
 reload 'user.mappings'
 reload 'user.plugins'
+reload 'user.visualmulti'
 
 lvim.format_on_save.enabled = true
 
 vim.opt.swapfile = false
-
-vim.g.VM_maps = {
-  ["I BS"] = "",
-}
 
 vim.cmd [[set relativenumber]]
 vim.cmd [[
