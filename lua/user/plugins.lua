@@ -6,5 +6,7 @@ lvim.plugins = {
     end
   }, {
   'mg979/vim-visual-multi'
-}
+}, {
+  'lervag/vimtex'
+},
 }

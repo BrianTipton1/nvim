@@ -15,10 +15,10 @@ vim.cmd [[
 ]]
 
 vim.cmd [[
-  try
+  try 
     aunmenu PopUp.How-to\ disable\ mouse
-    aunmenu PopUp.-1-
-  catch /^Vim\%((\a\+)\)\=:E329/
-    " Menu item does not exist, handle the error or do nothing
-  endtry
+    aunmenu PopUp.-1- 
+  catch /^Vim\%((\a\+)\)\=:E329/ 
+    " Menu item does not exist, handle the error or do nothing 
+  endtry 
 ]]
