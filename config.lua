@@ -1,9 +1,7 @@
-reload 'user.mappings'
-reload 'user.plugins'
-reload 'user.visualmulti'
+reload('user.mappings')
+reload('user.plugins')
 
 lvim.format_on_save.enabled = true
-
 vim.opt.swapfile = false
 
 vim.cmd [[set relativenumber]]
@@ -15,10 +13,16 @@ vim.cmd [[
 ]]
 
 vim.cmd [[
-  try 
+  try
     aunmenu PopUp.How-to\ disable\ mouse
-    aunmenu PopUp.-1- 
-  catch /^Vim\%((\a\+)\)\=:E329/ 
-    " Menu item does not exist, handle the error or do nothing 
-  endtry 
+    aunmenu PopUp.-1-
+  catch /^Vim\%((\a\+)\)\=:E329/
+    " Menu item does not exist, handle the error or do nothing
+  endtry
+]]
+
+vim.cmd [[
+  let g:VM_maps = {}
+  let g:VM_maps["Add Cursor Down"]             = '<C-S-Down>'
+  let g:VM_maps["Add Cursor Up"]               = '<C-S-Up>'
 ]]
