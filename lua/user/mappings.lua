@@ -1,13 +1,24 @@
+local helpers = require('user.helpers')
+
 lvim.keys.insert_mode["jj"] = "<Esc>"
 
 lvim.keys.insert_mode["<F12>"] = "<cmd>lua vim.lsp.buf.definition()<cr>"
 lvim.keys.normal_mode["<F12>"] = "<cmd>lua vim.lsp.buf.definition()<cr>"
 lvim.keys.insert_mode["<F36>"] = "<cmd>lua vim.lsp.buf.references()<cr>"
 lvim.keys.normal_mode["<F36>"] = "<cmd>lua vim.lsp.buf.references()<cr>"
-lvim.keys.insert_mode["<C-BS>"] = "<ESC>dbxi"
+lvim.keys.insert_mode["<C-BS>"] = "<ESC>dBxi"
+
+lvim.keys.visual_mode["<C-H>"] = function()
+  local selected_text = vim.fn.getreg('"')
+  vim.cmd('let @/ = "' .. vim.fn.escape(selected_text, '/\\') .. '"')
+  vim.cmd('set hlsearch')
+  vim.cmd('normal! :%s///')
+end
+
 
 lvim.keys.normal_mode["<Tab>"] = "<cmd>BufferLineCycleNext<cr>"
 lvim.keys.normal_mode["<S-Tab>"] = "<cmd>BufferLineCyclePrev<cr>"
+
 
 lvim.builtin.which_key.mappings["h"] = nil
 lvim.builtin.which_key.mappings["e"] = nil
@@ -26,23 +37,51 @@ lvim.builtin.which_key.mappings["`"] = {
   "Horizontal terminal"
 }
 lvim.builtin.which_key.mappings["X"] = {
-  "<cmd>BufferKill<cr>",
-  "Destroy Buffer w/o Saving",
+  "<cmd>w<cr><cmd>BufferKill<cr>",
+  "Destroy Buffer and write",
 }
 lvim.builtin.which_key.mappings["x"] = {
-  "<cmd>w<cr><cmd>BufferKill<cr>",
-  "Save and Destroy Buffer",
+  "<cmd>BufferKill<cr>",
+  "Destroy Buffer w/o writing",
 }
 lvim.builtin.which_key.mappings["f"] = {
   name = "+Find",
-  f = { "<cmd>Telescope git_files<cr>", "Files" },
+  f = {
+    function()
+      helpers.exec_if_git(
+        {
+          yes = function()
+            vim.cmd("Telescope git_files")
+          end,
+          no = function()
+            vim.cmd("Telescope find_files")
+          end
+        }
+      )
+    end,
+    "Files" },
   g = { "<cmd>Telescope live_grep<cr>", "Grep" },
-  c = { "<cmd>Telescope git_commits<cr>", "Commits" },
+  c = {
+    function()
+      helpers.exec_if_git(
+        {
+          yes = function()
+            vim.cmd("Telescope git_commits")
+          end,
+          no = function()
+            vim.cmd.echomsg('"Not a git directory...."')
+          end
+        }
+      )
+    end, "Commits" },
   b = { "<cmd>Telescope buffers<cr>", "Buffers" },
   s = { "<cmd>Telescope lsp_workspace_symbols<cr>", "Symbols" },
   p = { "<cmd>Telescope pickers<cr>", "All Pickers" }
 }
 
+lvim.builtin.which_key.mappings["b"] = {
+  d = { "<cmd>bd<cr>", "Buffer Delete" }
+}
 
 lvim.builtin.which_key.mappings["t"] = {
   name = "+Toggle",
