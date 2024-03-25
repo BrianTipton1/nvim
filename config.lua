@@ -1,5 +1,6 @@
 reload('user.mappings')
 reload('user.plugins')
+reload('user.dap')
 
 lvim.format_on_save.enabled = true
 vim.opt.swapfile = false
