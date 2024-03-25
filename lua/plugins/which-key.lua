@@ -50,8 +50,8 @@ local P = {
       ['<leader>t'] = {
         name = '+Toggle',
         f = { '<cmd>ToggleTerm<cr>', 'Floating terminal' },
-        h = { '<cmd>ToggleTerm size=4 direction=horizontal<cr>', 'Horizontal terminal' },
-        v = { '<cmd>ToggleTerm size=5 direction=vertical<cr>', 'Vertical terminal' },
+        h = { '<cmd>ToggleTerm size=5 direction=horizontal<cr>', 'Horizontal terminal' },
+        v = { '<cmd>ToggleTerm size=8 direction=vertical<cr>', 'Vertical terminal' },
         t = { '<cmd>NvimTreeToggle<cr>', 'Tree' },
       },
     }

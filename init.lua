@@ -2,11 +2,18 @@ require 'settings'
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('i', '<F12>', vim.lsp.buf.definition)
+vim.keymap.set('n', '<F12>', vim.lsp.buf.definition)
+vim.keymap.set('i', '<F36>', vim.lsp.buf.references)
+vim.keymap.set('n', '<F36>', vim.lsp.buf.references)
 
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('i', '<C-BS>', '<C-W>')
@@ -27,6 +34,20 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+vim.api.nvim_create_autocmd('VimLeavePre', {
+  desc = 'Close all terminal windows on Neovim exit',
+  group = vim.api.nvim_create_augroup('CloseTerminalsOnExit', { clear = true }),
+  callback = function()
+    local windows = vim.api.nvim_list_wins()
+    for _, win in ipairs(windows) do
+      local buf = vim.api.nvim_win_get_buf(win)
+      if vim.bo[buf].buftype == 'terminal' then
+        vim.api.nvim_win_close(win, true)
+      end
+    end
   end,
 })
 
