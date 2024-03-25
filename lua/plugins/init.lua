@@ -16,6 +16,8 @@ local P = {
   require 'plugins.tokyonight',
   require 'plugins.nvim-treesitter',
   require 'plugins.vim-sleuth',
+  require 'plugins.nvim-autopairs',
+  require 'plugins.nvim-tree',
 }
 
 return P
