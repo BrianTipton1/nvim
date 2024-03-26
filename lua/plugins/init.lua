@@ -18,6 +18,7 @@ local P = {
   require 'plugins.vim-sleuth',
   require 'plugins.nvim-autopairs',
   require 'plugins.nvim-tree',
+  require 'plugins.nvim-surround',
 }
 
 return P
