@@ -8,7 +8,7 @@ local P = {
           local api = require 'Comment.api'
           local mode = vim.fn.mode()
           if mode == 'v' or mode == 'V' then
-            api.toggle.linewise(vim.fn.visualmode())
+            api.toggle.linewise "'<,'>"
           else
             api.toggle.linewise.current()
           end

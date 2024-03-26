@@ -1,6 +1,6 @@
 local P = {
   'lervag/vimtex',
-  config = function()
+  init = function()
     vim.g.vimtex_view_general_options = [[--unique file:@pdf\#src:@line@tex]]
     vim.g.vimtex_view_general_viewer = 'distrobox-host-exec flatpak run org.kde.okular'
     vim.g.vimtex_quickfix_enabled = 1
