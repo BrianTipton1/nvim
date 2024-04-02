@@ -20,7 +20,9 @@ local P = {
         map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
         map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
         map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-        map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+        map('<leader>r', function()
+          vim.cmd [[LspRestart]]
+        end, '[R]estart LSP')
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -58,6 +60,17 @@ local P = {
       'texlab',
       'pylsp',
       'svelte',
+      'dockerls',
+      'docker_compose_language_service',
+      'jsonls',
+      'yamlls',
+      'zls',
+      -- 'gopls',
+      'clangd',
+      'clang-format',
+      'eslint',
+      'tailwindcss',
+      'marksman',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     require('mason-lspconfig').setup {
