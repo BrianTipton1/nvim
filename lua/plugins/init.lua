@@ -19,6 +19,7 @@ local P = {
   require 'plugins.nvim-autopairs',
   require 'plugins.nvim-tree',
   require 'plugins.nvim-surround',
+  require 'plugins.nvim-ts-autotag',
 }
 
 return P

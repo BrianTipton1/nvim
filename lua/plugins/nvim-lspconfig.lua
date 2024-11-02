@@ -64,13 +64,15 @@ local P = {
       'docker_compose_language_service',
       'jsonls',
       'yamlls',
-      'zls',
+      -- 'zls',
       -- 'gopls',
       'clangd',
       'clang-format',
       'eslint',
       'tailwindcss',
       'marksman',
+      'tsserver',
+      'csharp_ls',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
     require('mason-lspconfig').setup {

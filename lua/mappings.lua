@@ -6,6 +6,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover)
 
 vim.keymap.set('i', '<F12>', vim.lsp.buf.definition)
 vim.keymap.set('n', '<F12>', vim.lsp.buf.definition)
@@ -25,3 +26,6 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 
 vim.keymap.set('n', '<F1>', '<Esc>', { desc = 'Move focus to the upper window' })
 vim.keymap.set('i', '<F1>', '<Esc>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { desc = 'Rename symbol' })
+vim.keymap.set('i', '<F2>', vim.lsp.buf.rename, { desc = 'Rename symbol' })
