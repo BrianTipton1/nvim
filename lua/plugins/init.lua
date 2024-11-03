@@ -1,7 +1,4 @@
 local P = {
-  require 'plugins.vimtex',
-  require 'plugins.elixir',
-  require 'plugins.go',
   require 'plugins.vim-visual-multi',
   require 'plugins.nvim-dap-python',
   require 'plugins.toggleterm',

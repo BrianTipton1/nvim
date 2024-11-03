@@ -10,8 +10,13 @@ vim.keymap.set('n', '<leader>i', vim.lsp.buf.hover)
 
 vim.keymap.set('i', '<F12>', vim.lsp.buf.definition)
 vim.keymap.set('n', '<F12>', vim.lsp.buf.definition)
+vim.keymap.set('n', '<leader>cd', vim.lsp.buf.definition)
+
 vim.keymap.set('i', '<F36>', vim.lsp.buf.references)
 vim.keymap.set('n', '<F36>', vim.lsp.buf.references)
+vim.keymap.set('n', '<leader>cr', vim.lsp.buf.references)
+
+vim.keymap.set('n', '<leader>ci', vim.lsp.buf.implementation)
 
 vim.keymap.set('i', 'jj', '<Esc>')
 vim.keymap.set('i', '<C-BS>', '<C-W>')
@@ -29,3 +34,4 @@ vim.keymap.set('i', '<F1>', '<Esc>', { desc = 'Move focus to the upper window' }
 
 vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, { desc = 'Rename symbol' })
 vim.keymap.set('i', '<F2>', vim.lsp.buf.rename, { desc = 'Rename symbol' })
+vim.keymap.set('n', '<leader>cf', vim.lsp.buf.rename, { desc = 'Rename symbol' })
