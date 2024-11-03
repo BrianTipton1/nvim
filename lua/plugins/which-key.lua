@@ -1,61 +1,151 @@
 local helpers = require 'helpers'
 local P = {
   'folke/which-key.nvim',
-  event = 'VimEnter',
-  config = function()
-    require('which-key').register {
-      ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-      ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-      ['<leader>r'] = { name = '[R]estart', _ = 'which_key_ignore' },
-      ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-      ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-      ['<leader>-'] = { '<cmd>noh<cr>', 'No Highlight' },
-      ['<leader>X'] = {
-        '<cmd>w<cr><cmd>bd<cr>',
-        'Destroy Buffer and write',
-      },
-      ['<leader>x'] = {
-        '<cmd>bd<cr>',
-        'Destroy Buffer w/o writing',
-      },
-      ['<leader>f'] = {
-        name = '+Find',
-        f = {
-          function()
-            helpers.exec_if_git {
-              yes = function()
-                vim.cmd 'Telescope git_files'
-              end,
-              no = function()
-                vim.cmd 'Telescope find_files'
-              end,
-            }
+  event = 'VeryLazy',
+
+  keys = {
+    -- Misc
+    {
+      '<leader>?',
+      function()
+        require('which-key').show { global = false }
+      end,
+      desc = 'Buffer Local Keymaps (which-key)',
+    },
+    {
+      '<leader>-',
+      '<cmd>noh<cr>',
+      desc = 'No Highlight',
+    },
+    {
+      '<leader>x',
+      function()
+        local buf = vim.api.nvim_get_current_buf()
+        local buf_name = vim.api.nvim_buf_get_name(buf)
+
+        if vim.api.nvim_buf_get_option(buf, 'modifiable') and buf_name ~= '' then
+          vim.cmd 'write'
+        end
+
+        vim.api.nvim_buf_delete(buf, { force = true })
+      end,
+      desc = 'Destroy buffer and write',
+    },
+    {
+      '<leader>i',
+      vim.lsp.buf.hover,
+      desc = 'Destroy buffer and write',
+    },
+    -- File grouping
+    {
+      '<leader>f',
+      group = '[F]ile',
+    },
+    {
+      '<leader>fm',
+      vim.lsp.buf.format { async = false },
+      desc = 'Format',
+    },
+    -- Search Grouping
+    {
+      '<leader>s',
+      group = '[S]earch',
+    },
+    {
+      '<leader>sf',
+      function()
+        helpers.exec_if_git {
+          yes = function()
+            vim.cmd 'Telescope git_files'
           end,
-          'Files',
-        },
-        g = { '<cmd>Telescope live_grep<cr>', 'Grep' },
-        c = {
-          function() end,
-          'Commits',
-        },
-        b = { '<cmd>Telescope buffers<cr>', 'Buffers' },
-        s = { '<cmd>Telescope lsp_workspace_symbols<cr>', 'Symbols' },
-        p = { '<cmd>Telescope pickers<cr>', 'All Pickers' },
-      },
-
-      ['<leader>b'] = {
-        d = { '<cmd>bd<cr>', 'Buffer Delete' },
-      },
-
-      ['<leader>t'] = {
-        name = '+Toggle',
-        f = { '<cmd>ToggleTerm<cr>', 'Floating terminal' },
-        h = { '<cmd>ToggleTerm size=5 direction=horizontal<cr>', 'Horizontal terminal' },
-        v = { '<cmd>ToggleTerm size=8 direction=vertical<cr>', 'Vertical terminal' },
-        t = { '<cmd>NvimTreeToggle<cr>', 'Tree' },
-      },
-    }
-  end,
+          no = function()
+            vim.cmd 'Telescope find_files'
+          end,
+        }
+      end,
+      desc = 'Files',
+    },
+    {
+      '<leader>sg',
+      '<cmd>Telescope live_grep<cr>',
+      desc = 'Grep',
+    },
+    {
+      '<leader>st',
+      '<cmd>Telescope live_grep<cr>',
+      desc = 'Text (Grep)',
+    },
+    {
+      '<leader>sb',
+      '<cmd>Telescope buffers<cr>',
+      desc = 'Buffers',
+    },
+    {
+      '<leader>ss',
+      '<cmd>Telescope lsp_workspace_symbols<cr>',
+      desc = 'Symbols',
+    },
+    {
+      '<leader>sp',
+      '<cmd>Telescope pickers<cr>',
+      desc = 'Pickers',
+    },
+    --- Code Grouping
+    {
+      '<leader>c',
+      group = '[C]ode',
+    },
+    {
+      '<leader>ca',
+      vim.lsp.buf.code_action,
+      desc = 'Action',
+    },
+    {
+      '<leader>cf',
+      vim.lsp.buf.rename,
+      'Rename',
+    },
+    {
+      '<leader>cr',
+      vim.lsp.buf.references,
+      'References',
+    },
+    {
+      '<leader>cd',
+      vim.lsp.buf.definition,
+      'Definition',
+    },
+    {
+      '<leader>cd',
+      vim.lsp.buf.implementation,
+      'Implementation',
+    },
+    -- Error Grouping
+    {
+      '<leader>e',
+      group = '[E]rror',
+    },
+    {
+      '<leader>en',
+      vim.diagnostic.goto_next,
+      desc = 'Next',
+    },
+    {
+      '<leader>ep',
+      vim.diagnostic.goto_prev,
+      desc = 'Previous',
+    },
+    {
+      '<leader>eq',
+      vim.diagnostic.setloclist,
+      desc = 'QuickFix',
+    },
+    {
+      '<leader>ef',
+      vim.diagnostic.open_float,
+      desc = 'Show Error Messages',
+    },
+  },
 }
 
 return P
