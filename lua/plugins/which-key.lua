@@ -13,6 +13,11 @@ local P = {
       desc = 'Buffer Local Keymaps (which-key)',
     },
     {
+      '<leader>`',
+      '<cmd>ToggleTerm<cr>',
+      desc = 'Toggle Terminal',
+    },
+    {
       '<leader>-',
       '<cmd>noh<cr>',
       desc = 'No Highlight',
@@ -144,6 +149,15 @@ local P = {
       '<leader>ef',
       vim.diagnostic.open_float,
       desc = 'Show Error Messages',
+    },
+    {
+      '<leader>t',
+      group = '[T]oggle',
+    },
+    {
+      '<leader>tt',
+      '<cmd>NvimTreeToggle<cr>',
+      desc = 'Tree',
     },
   },
 }
